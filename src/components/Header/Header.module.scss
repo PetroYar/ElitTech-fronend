@@ -1,0 +1,26 @@
+@use "../../styles/forward.scss" as *;
+.header {
+  background: $header-color;
+  .container {
+    padding: toRem(10) toRem(20);
+    @include adaptiveValue("margin-bottom", 60, 20);
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: toRem(10);
+    .logo {
+      @include adaptiveValue("width", 100, 70);
+      img {
+        width: 100%;
+      }
+    }
+    ul{
+      display: flex;
+      @include adaptiveValue("gap", 40,10 );
+      text-align: center;
+    }
+    
+  }
+}
