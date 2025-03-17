@@ -12,14 +12,38 @@ const Header = (props) => {
         <nav>
           <ul>
             <li>
-              <NavLink to={"/add-survey"}>Додати опитування</NavLink>
+              <NavLink
+                to="/"
+                className={({ isActive }) => (isActive ? styles.active : "")}
+              >
+                Головна
+              </NavLink>
             </li>
             <li>
-              <NavLink to={"/office"}>Мій кабінет</NavLink> 
+              <NavLink
+                to="/add-survey"
+                className={({ isActive }) => (isActive ? styles.active : "")}
+              >
+                Додати опитування
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/office"
+                className={({ isActive }) => (isActive ? styles.active : "")}
+              >
+                Мій кабінет
+              </NavLink>
             </li>
           </ul>
         </nav>
-        {user ? <Link to={"/login"}>Увійти</Link> : <button>Вийти</button>}
+        {user ? (
+          <Link className={styles.login} to={"/login"}>
+            Увійти
+          </Link>
+        ) : (
+          <button className={styles.login}>Вийти</button>
+        )}
       </div>
     </header>
   );

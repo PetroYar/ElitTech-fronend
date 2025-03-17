@@ -2,7 +2,7 @@
 .header {
   background: $header-color;
   .container {
-    padding: toRem(10) toRem(20);
+    padding: toRem(10) ;
     @include adaptiveValue("margin-bottom", 60, 20);
     max-width: 1600px;
     margin: 0 auto;
@@ -10,17 +10,27 @@
     align-items: center;
     justify-content: space-between;
     gap: toRem(10);
+    @include adaptiveValue("font-size",20 ,18 );
     .logo {
       @include adaptiveValue("width", 100, 70);
       img {
         width: 100%;
       }
     }
-    ul{
+    ul {
       display: flex;
-      @include adaptiveValue("gap", 40,10 );
+      @include adaptiveValue("gap", 40, 10);
+    }
+    li {
       text-align: center;
     }
-    
+    .login{
+    background: $background-color;
+    padding: toRem(5) toRem(10);
+    border-radius: 5px;
+    }
+    .active{
+      color: $background-color;
+    }
   }
 }
