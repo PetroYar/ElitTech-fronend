@@ -1,0 +1,31 @@
+@use "../../styles/forward.scss" as *;
+
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(10);
+  position: relative;
+  width: 100%;
+  label {
+    padding-left: toRem(10);
+    
+  }
+  input {
+    padding: toRem(10);
+    border: 1px solid transparent;
+
+    &:focus {
+      border: 1px solid $primary-color;
+      
+    }
+  }
+  .error {
+    color: $error-color;
+    font-size: toRem(14);
+    position: absolute;
+    bottom: toRem(-20);
+    left: toRem(10);
+    letter-spacing: 1.5px;
+  }
+ 
+}

@@ -3,15 +3,15 @@
   background: $header-color;
   .container {
     padding: toRem(10);
-    @include adaptiveValue("margin-bottom", 60, 20);
     max-width: 1600px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: toRem(10);
-    @include adaptiveValue("font-size", 20, 18);
     overflow: hidden;
+    @include adaptiveValue("margin-bottom", 60, 20);
+    @include adaptiveValue("font-size", 20, 18);
     .logo {
       @include adaptiveValue("width", 100, 70);
       img {
@@ -26,7 +26,7 @@
       text-align: center;
     }
     .login {
-      background: $background-color;
+      background: $card-background;
       padding: toRem(5) toRem(10);
       border-radius: 5px;
     }
@@ -46,6 +46,8 @@
         align-items: center;
         justify-content: center;
         transition: all 0.5s ease-in;
+        flex-direction: column;
+        gap: toRem(30);
         ul {
           flex-direction: column;
           gap: toRem(30);
@@ -107,7 +109,7 @@
         }
         &::after {
           transform: rotate(50deg);
-bottom: 2px;
+          bottom: 2px;
           transform-origin: right;
         }
         span {

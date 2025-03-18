@@ -1,1 +1,13 @@
-@use '../../styles/forward.scss' as *;
+@use "../../styles/forward.scss" as *;
+
+.container {
+  padding: 0 toRem(15);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  margin-left: toRem(20);
+  li {
+    list-style-type: decimal;
+  }
+}

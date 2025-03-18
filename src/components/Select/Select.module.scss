@@ -1,0 +1,23 @@
+@use "../../styles/forward.scss" as *;
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: toRem(10);
+   .select {
+    max-width: max-content;
+    width: max-content;
+    padding: toRem(10);
+    border: 1px solid transparent;
+
+    &:focus {
+      border: 1px solid $primary-color;
+    }
+  }
+  label {
+    white-space: nowrap;
+    padding-left: toRem(10);
+    
+  }
+}
+ 
+

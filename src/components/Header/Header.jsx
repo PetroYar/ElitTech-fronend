@@ -11,20 +11,31 @@ const Header = (props) => {
 
   const user = true;
 
- const toggleBurger = () => {
-   setActiveBurger(!activeBurger);
+  const toggleBurger = () => {
+    setActiveBurger(!activeBurger);
 
-   if (!activeBurger) {
-     document.body.style.overflow = "hidden"; 
-   } else {
-     document.body.style.overflow = ""; 
-   }
- };
+    if (!activeBurger) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  };
 
-const closeBurger = () => {
-  setActiveBurger(false);
-  document.body.style.overflow = ""; 
-};
+  const closeBurger = () => {
+    setActiveBurger(false);
+    document.body.style.overflow = "";
+  };
+
+  const renderAuthButton = () => {
+    return user ? (
+      <Link className={styles.login} to="/login">
+        Увійти
+      </Link>
+    ) : (
+      <button className={styles.login}>Вийти</button>
+    );
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -58,23 +69,20 @@ const closeBurger = () => {
               </NavLink>
             </li>
           </ul>
+          {mobile > width && renderAuthButton()}
         </nav>
-        {user ? (
-          <Link className={styles.login} to={"/login"}>
-            Увійти
-          </Link>
-        ) : (
-          <button className={styles.login}>Вийти</button>
-        )}
+        {mobile < width && renderAuthButton()}
         {mobile > width && (
-          <button
-            onClick={toggleBurger}
-            className={`${styles.burger} ${
-              activeBurger ? styles.isActive : ""
-            } `}
-          >
-            <span></span>
-          </button>
+          <>
+            <button
+              onClick={toggleBurger}
+              className={`${styles.burger} ${
+                activeBurger ? styles.isActive : ""
+              } `}
+            >
+              <span></span>
+            </button>
+          </>
         )}
       </div>
     </header>

@@ -1,0 +1,51 @@
+@use "../../styles/forward.scss" as *;
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @include adaptiveValue("gap", 20, 10);
+  .question {
+    display: flex;
+    align-items: center;
+    gap: toRem(10);
+     button {
+          align-items: center;
+
+          &:hover {
+            color: $button-cancel;
+          }
+        }
+    @media (max-width: $mobileSmall) {
+      flex-wrap: wrap;
+    }
+
+    @include adaptiveValue("gap", 50, 20);
+  }
+
+  ul {
+    padding-left: toRem(20);
+    columns: 2;
+    @media (max-width: $mobileSmall) {
+      columns: 1;
+    }
+    li {
+      list-style-type: upper-latin;
+      margin-bottom: toRem(10);
+      margin-right: 40px;
+      div {
+        display: flex;
+        gap: toRem(5);
+        button {
+          align-items: center;
+
+          &:hover {
+            color: $button-cancel;
+          }
+        }
+      }
+    }
+
+  }
+  
+}
