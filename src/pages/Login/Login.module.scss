@@ -1,0 +1,36 @@
+@use "../../styles/forward.scss" as *;
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div {
+    position: relative;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(25);
+    border-radius: 10px;
+    border: 1px solid #ccc;
+
+    padding: toRem(20);
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: toRem(20);
+      align-items: center;
+    }
+  }
+  a {
+    text-decoration: underline;
+  }
+  .error {
+    color: $error-color;
+    font-size: toRem(14);
+    position: absolute;
+    bottom: toRem(-20);
+    left: toRem(10);
+    letter-spacing: 1.5px;
+  }
+}

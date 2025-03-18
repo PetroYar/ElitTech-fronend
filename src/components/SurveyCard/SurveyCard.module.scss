@@ -9,7 +9,6 @@
 
   border-radius: 10px;
   border: 1px solid #ccc;
-  // box-shadow: -1px 1px 3px #3169b5, 1px -1px 3px #438df5;
   background: $card-background;
   padding-right: 30px;
   @include adaptiveValue("padding", 20, 10);

@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 import useWindowSize from "../../hooks/useWindowSize";
 import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 
 const Header = (props) => {
   const [activeBurger, setActiveBurger] = useState(false);
@@ -9,7 +10,7 @@ const Header = (props) => {
   const { width } = useWindowSize();
   const mobile = 540;
 
-  const user = true;
+  const {user,logout} = useAuth()
 
   const toggleBurger = () => {
     setActiveBurger(!activeBurger);
@@ -27,12 +28,12 @@ const Header = (props) => {
   };
 
   const renderAuthButton = () => {
-    return user ? (
+    return !user ? (
       <Link className={styles.login} to="/login">
         Увійти
       </Link>
     ) : (
-      <button className={styles.login}>Вийти</button>
+      <button onClick={logout} className={styles.login}>Вийти</button>
     );
   };
 

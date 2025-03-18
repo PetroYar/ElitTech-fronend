@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import styles from "./SurveyCard.module.scss";
 import { FaEllipsisV, FaEdit, FaTrashAlt } from "react-icons/fa";
 const SurveyCard = ({ data = {} }) => {
-  const { user, title, description, passCount,slug } = data;
+  const { user, title, description, passCount,slug,_id } = data;
   return (
     <div className={styles.container}>
+      
       <Link to={`/survey/${slug}`} className={styles.link}>
         <h6>{title}</h6>
         <hr />
@@ -19,7 +20,7 @@ const SurveyCard = ({ data = {} }) => {
         <FaEllipsisV />
       </button>
       <div className={styles.option}>
-        <Link to="/edit">
+        <Link to={`/edit-survey/${_id}`}>
           <FaEdit />
         </Link>
         <button>

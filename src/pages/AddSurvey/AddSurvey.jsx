@@ -3,6 +3,7 @@ import Question from "../../components/Question/Question";
 import styles from "./AddSurvey.module.scss";
 import Button from "../../components/Button/Button";
 import { generateUniqueId } from "../../libs/GenerateUniqueId";
+import Input from "../../components/Input/Input";
 
 
 
@@ -27,10 +28,12 @@ const AddSurvey = (props) => {
 
   return (
     <ul className={styles.container}>
+      <Input type="text" label={"Заголовок"} />
+      <Input type="text" label={"Опис"} />
+      <hr />
       {questions.map((q) => (
         <li key={q.id}>
           <Question
-          
             value={q.value}
             onChange={(e) => handleQuestionChange(q.id, e.target.value)}
             onRemove={() => handleRemoveQuestion(q.id)}

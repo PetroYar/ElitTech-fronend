@@ -45,7 +45,7 @@ const Question = ({ onRemove }) => {
           ]}
           onChange={handleChange}
         />
-        <button onClick={() => onRemove(id)}>
+        <button onClick={ onRemove}>
           <FaTrashAlt />
         </button>
       </div>
