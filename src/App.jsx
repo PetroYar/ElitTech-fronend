@@ -8,6 +8,8 @@ import Registration from "./pages/Registration/Registration";
 import Layout from "./components/Loyouts/Loyout";
 import AddSurvey from "./pages/AddSurvey/AddSurvey";
 import Office from "./pages/Office/Office";
+import Survey from "./pages/Survey/Survey";
+
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/add-survey" element={<AddSurvey />} />
           <Route path="/office" element={<Office />} />
+          <Route path="/survey/:slug" element={<Survey/>} />
 
           <Route path="/registration" element={<Registration />} />
         </Route>

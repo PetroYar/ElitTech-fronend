@@ -7,7 +7,6 @@
   flex-direction: column;
   position: relative;
 
-  gap: toRem(15);
   border-radius: 10px;
   border: 1px solid #ccc;
   // box-shadow: -1px 1px 3px #3169b5, 1px -1px 3px #438df5;
@@ -20,9 +19,13 @@
     @include adaptiveValue("font-size", 24, 18);
   }
 
-  
-   
-  
+  .link {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    gap: toRem(15);
+  }
+
   p {
     line-height: 1.3;
     flex: 1 1 auto;
@@ -58,7 +61,7 @@
     right: toRem(35);
     top: toRem(10);
     border-radius: 10px;
-    border: 1px solid $primary-color;
+    // border: 1px solid $primary-color;
     padding: toRem(10);
 
     background: $background-color;
