@@ -4,28 +4,33 @@ import styles from "./Question.module.scss";
 import { useState } from "react";
 import Select from "../Select/Select";
 import Button from "../Button/Button";
+import { generateUniqueId } from "../../libs/GenerateUniqueId";
 
-const Question = ({onRemove}) => {
+const Question = ({ onRemove }) => {
   const [inputType, setInputType] = useState("");
-  const [options, setOptions] = useState([""]);
+  const [options, setOptions] = useState([
+    { id: generateUniqueId(), value: "" },
+  ]);
 
   const handleChange = (e) => {
     setInputType(e.target.value);
   };
+
   const handleAddOption = () => {
-    setOptions(prev=> [...prev, ""]);
-  };
-  const handleRemoveOption = (index) => {
-    const newOptions = [...options];
-    newOptions.splice(index, 1);
-    setOptions(newOptions);
+    setOptions((prev) => [...prev, { id: generateUniqueId(), value: "" }]);
   };
 
-const handleOptionChange = (index, value) => {
-  setOptions((prevOptions) =>
-    prevOptions.map((option, i) => (i === index ? value : option))
-  );
-};
+  const handleRemoveOption = (optionId) => {
+    setOptions((prev) => prev.filter((option) => option.id !== optionId));
+  };
+
+  const handleOptionChange = (optionId, value) => {
+    setOptions((prev) =>
+      prev.map((option) =>
+        option.id === optionId ? { ...option, value } : option
+      )
+    );
+  };
 
   return (
     <div className={styles.container}>
@@ -33,7 +38,6 @@ const handleOptionChange = (index, value) => {
         <Input type="text" label={"Введіть запитання"} />
         <Select
           label="Оберіть тип відповіді"
-         
           options={[
             { value: "text", label: "Текстове поле" },
             { value: "radio", label: "Один варіант" },
@@ -41,25 +45,31 @@ const handleOptionChange = (index, value) => {
           ]}
           onChange={handleChange}
         />
-        <button onClick={onRemove}><FaTrashAlt/></button>
+        <button onClick={() => onRemove(id)}>
+          <FaTrashAlt />
+        </button>
       </div>
       {(inputType === "radio" || inputType === "check") && (
         <>
           <ul>
-            {options.map((option, index) => (
-              <li key={index}>
+            {options.map((option) => (
+              <li key={option.id}>
                 <div>
                   <Input
                     type="text"
                     placeholder={
-                      index === 0 ? "правильна відповідь" : "варіант відповіді"
+                      options[0].id === option.id
+                        ? "правильна відповідь"
+                        : "варіант відповіді"
                     }
-                    value={option}
-                    onChange={(e) => handleOptionChange(index, e.target.value)}
+                    value={option.value}
+                    onChange={(e) =>
+                      handleOptionChange(option.id, e.target.value)
+                    }
                   />
                   <button
                     type="button"
-                    onClick={() => handleRemoveOption(index)}
+                    onClick={() => handleRemoveOption(option.id)}
                   >
                     <FaTrashAlt />
                   </button>
