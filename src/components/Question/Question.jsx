@@ -33,7 +33,7 @@ const handleOptionChange = (index, value) => {
         <Input type="text" label={"Введіть запитання"} />
         <Select
           label="Оберіть тип відповіді"
-          select
+         
           options={[
             { value: "text", label: "Текстове поле" },
             { value: "radio", label: "Один варіант" },
