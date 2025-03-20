@@ -1,9 +1,17 @@
 @use "../../styles/forward.scss" as *;
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+   h1{
+    text-align: center;
+    margin-bottom: toRem(20);
+    @include adaptiveValue("font-size",32 ,24 );
+    margin-bottom: toRem(40);
+  }
   div {
     position: relative;
   }

@@ -23,6 +23,7 @@ const Registration = () => {
 
   return (
     <div className={styles.container}>
+      <h1>Зареєструватися</h1>
       <Formik
         initialValues={{
           username: "",

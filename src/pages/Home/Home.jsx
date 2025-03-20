@@ -13,7 +13,7 @@ const Home = (props) => {
         const req = await getData("/survey");
        
         setData(req);
-        console.log(req)
+       
       } catch (error) {
         console.error(error);
       }
