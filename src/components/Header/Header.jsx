@@ -24,16 +24,25 @@ const Header = (props) => {
 
   const closeBurger = () => {
     setActiveBurger(false);
+
     document.body.style.overflow = "";
   };
 
   const renderAuthButton = () => {
     return !user ? (
-      <Link className={styles.login} to="/login">
+      <Link onClick={closeBurger} className={styles.login} to="/login">
         Увійти
       </Link>
     ) : (
-      <button onClick={logout} className={styles.login}>Вийти</button>
+      <button
+        onClick={() => {
+          logout();
+          closeBurger();
+        }}
+        className={styles.login}
+      >
+        Вийти
+      </button>
     );
   };
 
@@ -41,7 +50,7 @@ const Header = (props) => {
     <header className={styles.header}>
       <div className={styles.container}>
         <Link onClick={closeBurger} to={"/"} className={styles.logo}>
-          <img src={"./logo.png"} alt="logo question" />
+          <img src={"/logo.png"} alt="logo question" />
         </Link>
         <nav className={!activeBurger ? styles.isActiveNav : ""}>
           <ul>
@@ -69,6 +78,7 @@ const Header = (props) => {
                 Мій кабінет
               </NavLink>
             </li>
+            <li>{user?.username}</li>
           </ul>
           {mobile > width && renderAuthButton()}
         </nav>

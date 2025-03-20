@@ -1,5 +1,5 @@
-import "./styles/global.scss";
 import "./styles/null.scss";
+import "./styles/global.scss";
 
 import Home from "./pages/Home/Home";
 import { Route, Routes } from "react-router-dom";
@@ -10,6 +10,7 @@ import AddSurvey from "./pages/AddSurvey/AddSurvey";
 import Office from "./pages/Office/Office";
 import Survey from "./pages/Survey/Survey";
 import EditSurvey from "./pages/EditSurvey/EditSurvey";
+import SurveyResults from "./pages/SurveyResults/SurveyResults";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/office" element={<Office />} />
           <Route path="/survey/:slug" element={<Survey />} />
           <Route path="/edit-survey/:id" element={<EditSurvey />} />
+          <Route path="/result/:id" element={<SurveyResults />} />
 
           <Route path="/registration" element={<Registration />} />
         </Route>

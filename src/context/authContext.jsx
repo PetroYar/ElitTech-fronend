@@ -30,9 +30,9 @@ const navigate = useNavigate()
 
   const login = async (user) => {
     try {
-      const req = await postData("/auth/login", user);
-      localStorage.setItem("token", req.token);
-      getUser(req.token);
+      const res = await postData("/auth/login", user);
+      localStorage.setItem("token", res.token);
+      getUser(res.token);
       navigate("/");
       setErrorsMsg("");
       return data;
@@ -49,8 +49,8 @@ const navigate = useNavigate()
 
   const registration = async (newUser) => {
     try {
-      const req = await postData("/auth/registration", newUser);
-      console.log(req);
+      const res = await postData("/auth/registration", newUser);
+      console.log(res);
     } catch (error) {
       console.log(error);
       throw error;

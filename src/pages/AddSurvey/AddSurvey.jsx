@@ -1,47 +1,150 @@
-import { useState } from "react";
+import { Formik, Form, FieldArray, ErrorMessage, Field } from "formik";
+
 import Question from "../../components/Question/Question";
 import styles from "./AddSurvey.module.scss";
 import Button from "../../components/Button/Button";
 import { generateUniqueId } from "../../libs/GenerateUniqueId";
 import Input from "../../components/Input/Input";
+import { validSurveySchema } from "../../libs/ValidationSchema/surveySchema";
+import { postData } from "../../libs/Services";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
+const AddSurvey = () => {
+  const { user } = useAuth();
+  const navigation = useNavigate();
 
+  const handleSubmit = async (values, { resetForm }) => {
+    const { title, description } = values;
 
-const AddSurvey = (props) => {
-  const [questions, setQuestions] = useState([
-    { id: generateUniqueId(), value: "" },
-  ]);
+    const newSurvey = {
+      title,
+      description,
+      userId: user._id,
+      questionCount: values.questions.length,
+    };
 
-  const handleAddQuestion = () => {
-    setQuestions((prev) => [...prev, { id: generateUniqueId(), value: "" }]);
-  };
+    try {
+      const surveyRes = await postData("/survey", newSurvey);
+      const surveyId = surveyRes?._id;
 
-  const handleRemoveQuestion = (id) => {
-    setQuestions((prev) => prev.filter((q) => q.id !== id));
-  };
+      if (surveyId) {
+        const questions = values.questions.map((q) => ({
+          surveyId,
+          question: q.question,
+          type: q.type,
+          options: q.options.map((option) => option.value),
+        }));
 
-  const handleQuestionChange = (id, value) => {
-    setQuestions((prev) =>
-      prev.map((q) => (q.id === id ? { ...q, value } : q))
-    );
+        console.log("Questions to add:", questions);
+
+        const addQuestionPromises = questions.map((question) =>
+          postData("/question", question)
+        );
+
+        try {
+          const questionResponses = await Promise.all(addQuestionPromises);
+          console.log("All questions added:", questionResponses);
+
+          resetForm();
+          navigation("/");
+        } catch (questionError) {
+          console.error("Error adding questions:", questionError);
+        }
+      } else {
+        console.error("Could not retrieve survey ID after creation.");
+      }
+    } catch (error) {
+      console.error("Error creating survey:", error);
+    }
   };
 
   return (
-    <ul className={styles.container}>
-      <Input type="text" label={"Заголовок"} />
-      <Input type="text" label={"Опис"} />
-      <hr />
-      {questions.map((q) => (
-        <li key={q.id}>
-          <Question
-            value={q.value}
-            onChange={(e) => handleQuestionChange(q.id, e.target.value)}
-            onRemove={() => handleRemoveQuestion(q.id)}
-          />
-        </li>
-      ))}
-      <Button onClick={handleAddQuestion}>Додати запитання</Button>
-    </ul>
+    <Formik
+      initialValues={{
+        title: "",
+        description: "",
+        questions: [
+          { id: generateUniqueId(), question: "", type: "text", options: [] },
+        ],
+      }}
+      validationSchema={validSurveySchema}
+      onSubmit={handleSubmit}
+    >
+      {({ values, errors, touched }) => (
+        <Form className={styles.container}>
+          <div>
+            <Field as={Input} label="Заголовок" name="title" />
+            <ErrorMessage
+              name="title"
+              component="div"
+              className={styles.error}
+            />
+          </div>
+          <hr />
+          <div>
+            <Field as={Input} label="Опис" name="description" />
+            <ErrorMessage
+              name="description"
+              component="div"
+              className={styles.error}
+            />
+          </div>
+
+          <hr />
+
+          <FieldArray name="questions">
+            {({ push, remove }) => (
+              <>
+                <ul>
+                  {values.questions.map((q, index) => (
+                    <li className={styles.item} key={q.id}>
+                      <Question index={index} onRemove={() => remove(index)} />
+                      {errors.questions &&
+                        errors.questions[index] &&
+                        touched.questions &&
+                        touched.questions[index] && (
+                          <div className={styles.error}>
+                            {errors.questions[index].question}
+                          </div>
+                        )}
+                      {errors.questions &&
+                        errors.questions[index] &&
+                        errors.questions[index].options &&
+                        touched.questions &&
+                        touched.questions[index] &&
+                        touched.questions[index].options &&
+                        errors.questions[index].options.map(
+                          (optionError, optionIndex) => (
+                            <div key={optionIndex} className={styles.error}>
+                              {optionError?.value}
+                            </div>
+                          )
+                        )}
+                    </li>
+                  ))}
+                </ul>
+                <hr />
+                <Button
+                  type="button"
+                  onClick={() =>
+                    push({
+                      id: generateUniqueId(),
+                      question: "",
+                      type: "text",
+                      options: [],
+                    })
+                  }
+                >
+                  Додати запитання
+                </Button>
+                <Button type="submit">Зберегти анкету</Button>
+              </>
+            )}
+          </FieldArray>
+        </Form>
+      )}
+    </Formik>
   );
 };
 

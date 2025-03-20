@@ -1,0 +1,27 @@
+@use "../../../styles/forward.scss" as *;
+.listOption {
+  padding-left: toRem(20);
+
+  li {
+    list-style-type: upper-latin ;
+    // padding: toRem(5);
+    div{
+      display: flex;
+      gap: toRem(20);
+      padding-bottom: toRem(10);
+    }
+  
+  }
+  
+}
+div{
+  position: relative;
+}
+ .error {
+    color: $error-color;
+    font-size: toRem(14);
+    position: absolute;
+    bottom: toRem(-20);
+    left: toRem(10);
+    letter-spacing: 1.5px;
+  }

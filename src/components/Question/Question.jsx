@@ -1,92 +1,82 @@
 import { FaTrashAlt } from "react-icons/fa";
 import Input from "../Input/Input";
 import styles from "./Question.module.scss";
-import { useState } from "react";
 import Select from "../Select/Select";
 import Button from "../Button/Button";
 import { generateUniqueId } from "../../libs/GenerateUniqueId";
+import { ErrorMessage, Field, FieldArray, useFormikContext } from "formik";
 
-const Question = ({ onRemove }) => {
-  const [inputType, setInputType] = useState("");
-  const [options, setOptions] = useState([
-    { id: generateUniqueId(), value: "" },
-  ]);
-
-  const handleChange = (e) => {
-    setInputType(e.target.value);
-  };
-
-  const handleAddOption = () => {
-    setOptions((prev) => [...prev, { id: generateUniqueId(), value: "" }]);
-  };
-
-  const handleRemoveOption = (optionId) => {
-    setOptions((prev) => prev.filter((option) => option.id !== optionId));
-  };
-
-  const handleOptionChange = (optionId, value) => {
-    setOptions((prev) =>
-      prev.map((option) =>
-        option.id === optionId ? { ...option, value } : option
-      )
-    );
-  };
+const Question = ({ onRemove, index }) => {
+  const { values } = useFormikContext();
 
   return (
     <div className={styles.container}>
       <div className={styles.question}>
-        <Input type="text" label={"Введіть запитання"} />
-        <Select
+        <Field
+          as={Input}
+          type="text"
+          name={`questions.${index}.question`}
+          label={"Введіть запитання"}
+        />
+        <Field
+          as={Select}
           label="Оберіть тип відповіді"
+          name={`questions.${index}.type`}
           options={[
             { value: "text", label: "Текстове поле" },
             { value: "radio", label: "Один варіант" },
-            { value: "check", label: "Кілька варіантів" },
+            { value: "checkbox", label: "Кілька варіантів" },
           ]}
-          onChange={handleChange}
         />
-        <button onClick={ onRemove}>
+        <button type="button" onClick={onRemove}>
           <FaTrashAlt />
         </button>
       </div>
-      {(inputType === "radio" || inputType === "check") && (
-        <>
-          <ul>
-            {options.map((option) => (
-              <li key={option.id}>
-                <div>
-                  <Input
-                    type="text"
-                    placeholder={
-                      options[0].id === option.id
-                        ? "правильна відповідь"
-                        : "варіант відповіді"
-                    }
-                    value={option.value}
-                    onChange={(e) =>
-                      handleOptionChange(option.id, e.target.value)
-                    }
-                  />
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveOption(option.id)}
-                  >
-                    <FaTrashAlt />
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <Button
-            className={styles.add}
-            type="button"
-            onClick={handleAddOption}
-          >
-            Додати варіант
-          </Button>
-        </>
-      )}
-      <hr />
+      <FieldArray name={`questions.${index}.options`}>
+        {({ push, remove }) => (
+          <>
+            {values.questions[index]?.type === "radio" ||
+            values.questions[index]?.type === "checkbox" ? (
+              <>
+                <ul>
+                  {values.questions[index]?.options?.map(
+                    (option, optionIndex) => (
+                      <li className={styles.item} key={option.id}>
+                        <div>
+                          <Field
+                            as={Input}
+                            type="text"
+                            name={`questions.${index}.options.${optionIndex}.value`}
+                            placeholder={"варіант відповіді"}
+                          />
+                          <ErrorMessage
+                            name={`questions.${index}.options.${optionIndex}.value`}
+                            component="div"
+                            className={styles.error}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => remove(optionIndex)}
+                          >
+                            <FaTrashAlt />
+                          </button>
+                        </div>
+                      </li>
+                    )
+                  )}
+                </ul>
+                <Button
+                  className={styles.add}
+                  type="button"
+                  onClick={() => push({ id: generateUniqueId(), value: "" })}
+                >
+                  Додати варіант
+                </Button>
+              </>
+            ) : null}
+          </>
+        )}
+      </FieldArray>
     </div>
   );
 };

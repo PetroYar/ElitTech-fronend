@@ -6,6 +6,7 @@
   gap: toRem(10);
   position: relative;
   width: 100%;
+  // padding-bottom: toRem(20);
   label {
     padding-left: toRem(10);
     
@@ -23,7 +24,7 @@
     color: $error-color;
     font-size: toRem(14);
     position: absolute;
-    bottom: toRem(-20);
+    top: toRem(-20);
     left: toRem(10);
     letter-spacing: 1.5px;
   }

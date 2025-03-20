@@ -43,3 +43,23 @@ export const postData = async (params, body, token) => {
     throw error;
   }
 };
+
+export const deleteData = async (params, token) => {
+  try {
+    const response = await fetch(`${API_URL}${params}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+
+    return { success: true, message: "Deleted successfully" };
+  } catch (error) {
+    console.error("Error deleting data:", error);
+    throw error;
+  }
+};

@@ -9,13 +9,13 @@
     display: flex;
     align-items: center;
     gap: toRem(10);
-     button {
-          align-items: center;
+    button {
+      align-items: center;
 
-          &:hover {
-            color: $button-cancel;
-          }
-        }
+      &:hover {
+        color: $button-cancel;
+      }
+    }
     @media (max-width: $mobileSmall) {
       flex-wrap: wrap;
     }
@@ -26,6 +26,7 @@
   ul {
     padding-left: toRem(20);
     columns: 2;
+    position: relative;
     @media (max-width: $mobileSmall) {
       columns: 1;
     }
@@ -33,9 +34,11 @@
       list-style-type: upper-latin;
       margin-bottom: toRem(10);
       margin-right: 40px;
+
       div {
         display: flex;
         gap: toRem(5);
+       
         button {
           align-items: center;
 
@@ -45,7 +48,13 @@
         }
       }
     }
-
   }
-  
+  .error {
+    color: $error-color;
+    font-size: toRem(14);
+    position: absolute;
+    bottom: toRem(-20);
+    left: toRem(10);
+    letter-spacing: 1.5px;
+  }
 }

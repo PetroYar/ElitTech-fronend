@@ -7,7 +7,26 @@
   gap: 20px;
 
   margin-left: toRem(20);
-  li {
-    list-style-type: decimal;
+  ul{
+    display: flex;
+    flex-direction: column;
+    gap: toRem(20);
+    position: relative;
+    li {
+      list-style-type: decimal;
+      position: relative;
+    }
+ }
+  div{
+    position: relative;
   }
+   .error {
+    color: $error-color ;
+    font-size: toRem(14);
+    position: absolute;
+    top: toRem(13);
+    left: toRem(10);
+    letter-spacing: 1.5px;
+  }
+  
 }

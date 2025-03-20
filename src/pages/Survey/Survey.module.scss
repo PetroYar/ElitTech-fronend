@@ -1,0 +1,44 @@
+@use "../../styles/forward.scss" as *;
+
+.container {
+  padding: toRem(20);
+  h1{
+    text-align: center;
+    margin-bottom: toRem(20);
+    @include adaptiveValue("font-size",32 ,24 );
+  }
+  .description{
+    text-align: center;
+    margin-bottom: toRem(40);
+    
+  }
+  .list {
+    padding-left: toRem(10);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: toRem(30);
+    gap: toRem(20);
+    li {
+      list-style-type: decimal;
+      
+    }
+    h6 {
+      margin-bottom: toRem(10);
+      @include adaptiveValue("font-size", 22, 18);
+    }
+  }
+  .button{
+   
+    width: 100%;
+    padding: toRem(10);
+  }
+   .error {
+    color: $error-color;
+    font-size: toRem(14);
+    position: absolute;
+    bottom: toRem(-20);
+    left: toRem(10);
+    letter-spacing: 1.5px;
+  }
+
+}
