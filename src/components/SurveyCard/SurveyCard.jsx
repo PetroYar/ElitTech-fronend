@@ -37,7 +37,7 @@ const SurveyCard = ({ data = {} ,onDelete}) => {
             <FaEllipsisV />
           </button>
           <div  className={`${styles.option} ${isMenuOpen ? styles.open : ""}`}>
-            <Link to={`/edit-survey/${_id}`}>
+            <Link to={`/edit-survey/${slug}`}>
               <FaEdit />
             </Link>
             <button onClick={() => onDelete(_id)}>

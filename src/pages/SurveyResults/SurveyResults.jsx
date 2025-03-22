@@ -13,7 +13,6 @@ const SurveyResults = (props) => {
       try {
         const res = await getData(`/answer/${id}`);
         setData(res);
-        console.log(res);
       } catch (error) {
         console.error(error);
       }
@@ -21,9 +20,9 @@ const SurveyResults = (props) => {
     getAnswers();
   }, [id]);
 
-const duration = `${Math.floor(data?.duration / 60)}хв  ${(
-  data?.duration % 60
-).toFixed(0)} с`;
+  const duration = `${Math.floor(data?.duration / 60)}хв  ${(
+    data?.duration % 60
+  ).toFixed(0)} сек`;
 
   return (
     <div className={styles.container}>
@@ -35,8 +34,8 @@ const duration = `${Math.floor(data?.duration / 60)}хв  ${(
             : item.answer;
           return (
             <li key={item._id}>
-              <p><span>запитання:</span> {item.question}</p>
-              <p> відповідь : {answerText}</p>
+              <p>{item.question}</p>
+              <p>Ваша відповідь : {answerText}</p>
             </li>
           );
         })}

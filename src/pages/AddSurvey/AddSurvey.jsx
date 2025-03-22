@@ -36,16 +36,12 @@ const AddSurvey = () => {
           options: q.options.map((option) => option.value),
         }));
 
-        console.log("Questions to add:", questions);
-
         const addQuestionPromises = questions.map((question) =>
           postData("/question", question)
         );
 
         try {
           const questionResponses = await Promise.all(addQuestionPromises);
-          console.log("All questions added:", questionResponses);
-
           resetForm();
           navigation("/");
         } catch (questionError) {

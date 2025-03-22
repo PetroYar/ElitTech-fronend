@@ -63,3 +63,24 @@ export const deleteData = async (params, token) => {
     throw error;
   }
 };
+export const updateData = async (params, body, token) => {
+  try {
+    const response = await fetch(`${API_URL}${params}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error updating data:", error);
+    throw error;
+  }
+};

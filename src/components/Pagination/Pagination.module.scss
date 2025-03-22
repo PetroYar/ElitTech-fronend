@@ -1,0 +1,33 @@
+@use "../../styles/forward.scss" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+  margin: toRem(40) 0;
+
+  .active {
+    color: $header-color;
+  }
+  .button {
+    font-size: toRem(20);
+    :hover {
+      color: $header-color;
+    }
+  }
+  ul {
+    display: flex;
+    align-items: center;
+    margin-bottom: toRem(0);
+    padding-bottom: toRem(0);
+    gap: toRem(3);
+    width: 130px;
+    justify-content: center;
+    li{
+      padding: toRem(2);
+      background: $card-background;
+      font-size: toRem(20);
+    }
+  }
+}

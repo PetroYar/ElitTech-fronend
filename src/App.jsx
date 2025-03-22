@@ -27,7 +27,7 @@ function App() {
             <Route path="/add-survey" element={<AddSurvey />} />
             <Route path="/office" element={<Office />} />
             <Route path="/survey/:slug" element={<Survey />} />
-            <Route path="/edit-survey/:id" element={<EditSurvey />} />
+            <Route path="/edit-survey/:slug" element={<EditSurvey />} />
             <Route path="/result/:id" element={<SurveyResults />} />
           </Route>
         </Route>

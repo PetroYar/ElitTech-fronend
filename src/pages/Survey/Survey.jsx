@@ -43,9 +43,11 @@ const Survey = (props) => {
   }, [slug]);
 
   const handleSubmit = async (values, { resetForm }) => {
+    
     const endTime = new Date().toISOString();
+
     const newAnswers = {
-      surveyId: data?.surveyId,
+      surveyId: data?._id,
       userId: user?._id,
       userAnswers: Object.entries(values).map(([questionId, answer]) => ({
         question: questionId,
@@ -54,10 +56,11 @@ const Survey = (props) => {
       startTime,
       endTime,
     };
-   
+
+
     try {
       const res = await postData(`/answer`, newAnswers)
-      // navigation(`/result/${res._id}`)
+      navigation(`/result/${res._id}`)
       resetForm()
     } catch (error) {
       console.error(error)

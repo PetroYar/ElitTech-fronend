@@ -16,7 +16,7 @@ const Question = ({ onRemove, index }) => {
           as={Input}
           type="text"
           name={`questions.${index}.question`}
-          label={"Введіть запитання"}
+          label={"Запитання"}
         />
         <Field
           as={Select}

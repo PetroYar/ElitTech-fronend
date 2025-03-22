@@ -1,0 +1,8 @@
+@use '../../styles/forward.scss' as *;
+.container{
+  ul{
+    li{
+      margin-bottom: toRem(20);
+    }
+  }
+}
