@@ -20,8 +20,8 @@
     }
     ul {
       display: flex;
-      @include adaptiveValue("gap", 40, 10);
       padding-bottom: toRem(0);
+      @include adaptiveValue("gap", 40, 10);
     }
     li {
       text-align: center;

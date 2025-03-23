@@ -78,7 +78,7 @@ const Header = (props) => {
                 Мій кабінет
               </NavLink>
             </li>
-            <li>{user?.username}</li>
+           
           </ul>
           {mobile > width && renderAuthButton()}
         </nav>

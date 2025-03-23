@@ -7,6 +7,7 @@ import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import { validSurveySchema } from "../../libs/ValidationSchema/surveySchema";
 import { getData, updateData } from "../../libs/Services";
+import toast from "react-hot-toast";
 
 const EditSurvey = () => {
   const {slug} = useParams(); 
@@ -57,8 +58,12 @@ const EditSurvey = () => {
 
       await Promise.all(updateQuestionPromises);
       navigation("/"); 
+      toast.success("Змінни збережені");
+
     } catch (error) {
       console.error("Error updating survey:", error);
+      toast.error("Сталася помилка спробуйте пізніше");
+
     }
   };
 

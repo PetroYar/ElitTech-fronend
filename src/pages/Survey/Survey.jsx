@@ -24,7 +24,7 @@ const Survey = (props) => {
       try {
         const res = await getData(`/survey/questions/${slug}`);
         setData(res);
-
+console.log(res)
         const initial = {};
         res.questions.forEach((q) => {
           initial[q._id] = q.type === "checkbox" ? [] : "";
@@ -43,7 +43,7 @@ const Survey = (props) => {
   }, [slug]);
 
   const handleSubmit = async (values, { resetForm }) => {
-    
+
     const endTime = new Date().toISOString();
 
     const newAnswers = {

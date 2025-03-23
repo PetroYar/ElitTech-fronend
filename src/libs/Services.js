@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:5000/api";
+// const API_URL = "http://localhost:5000/api";
+const API_URL = "https://elit-tech-backend.vercel.app/api";
 
 export const getData = async (params, token) => {
   try {
@@ -31,9 +32,11 @@ export const postData = async (params, body, token) => {
       },
       body: JSON.stringify(body),
     });
-
     if (!response.ok) {
-      throw new Error(`Request failed with status: ${response.status}`);
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || `Request failed with status: ${response.status}`
+      );
     }
 
     const data = await response.json();

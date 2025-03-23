@@ -6,17 +6,18 @@ import styles from "./Registration.module.scss";
 import { useAuth } from "../../hooks/useAuth";
 import { validRegistrationSchema } from "../../libs/ValidationSchema/authSchema";
 
+
 const Registration = () => {
-  const { user, registration } = useAuth();
+  const { registration } = useAuth();
 
 
   const handleSubmit = async (values) => {
     const { confirmPassword, ...dataToSend } = values;
     try {
-      const test = await registration(dataToSend)
-      console.log(test);
+      await registration(dataToSend)
     } catch (error) {
       console.log(error)
+    
     }
     
   };

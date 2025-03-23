@@ -5,6 +5,7 @@ import styles from "./Home.module.scss";
 import { deleteData, getData } from "../../libs/Services";
 import { Link, useSearchParams } from "react-router-dom";
 import Pagination from "../../components/Pagination/Pagination";
+import toast from "react-hot-toast";
 
 const Home = (props) => {
   const [data, setData] = useState(null);
@@ -34,9 +35,13 @@ const Home = (props) => {
         ...prevData,
         surveys: prevData.surveys.filter((survey) => survey._id !== id),
       }));
+      toast.success('Опитування видалено')
+      
       console.log(req);
     } catch (error) {
       console.error("Error deleting survey:", error);
+      toast.error("Сталася помилка спробуйте пізніше");
+
     }
   };
 

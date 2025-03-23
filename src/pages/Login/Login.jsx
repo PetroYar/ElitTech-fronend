@@ -5,18 +5,27 @@ import Input from "../../components/Input/Input";
 import styles from "./Login.module.scss";
 import { useAuth } from "../../hooks/useAuth";
 import { validLoginSchema } from "../../libs/ValidationSchema/authSchema";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const Login = () => {
-  const { login } = useAuth();
+  const { user, login } = useAuth();
 
   const handleSubmit = async (values) => {
     try {
-      const test = await login(values);
-      console.log(test);
+      await login(values);
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(() => {
+    const welcome = () => {
+      if (user) {
+        toast.success(`Вітаємо ${user.username}`);
+      }
+    };
+    welcome();
+  }, [user]);
 
   return (
     <div className={styles.container}>

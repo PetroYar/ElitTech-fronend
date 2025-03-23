@@ -9,6 +9,8 @@ import { validSurveySchema } from "../../libs/ValidationSchema/surveySchema";
 import { postData } from "../../libs/Services";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
 
 const AddSurvey = () => {
   const { user } = useAuth();
@@ -41,8 +43,9 @@ const AddSurvey = () => {
         );
 
         try {
-          const questionResponses = await Promise.all(addQuestionPromises);
+           await Promise.all(addQuestionPromises);
           resetForm();
+          toast.success('Опитування дадано')
           navigation("/");
         } catch (questionError) {
           console.error("Error adding questions:", questionError);
@@ -52,8 +55,11 @@ const AddSurvey = () => {
       }
     } catch (error) {
       console.error("Error creating survey:", error);
+      toast.error(" Не вдалося створити опитування!");
     }
   };
+
+
 
   return (
     <Formik
