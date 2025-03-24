@@ -1,0 +1,9 @@
+@use '../../../styles/forward.scss' as *;
+
+
+.doughnut{
+  margin: 0 auto;
+
+
+  @include adaptiveValue("width",400 ,300 );
+}
