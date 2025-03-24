@@ -7,6 +7,7 @@
     flex-wrap: wrap;
 
     gap: toRem(20);
+   
     @media (max-width: $mobile) {
       justify-content: space-around;
     }
