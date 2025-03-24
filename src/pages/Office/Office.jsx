@@ -63,7 +63,7 @@ const [selectedQuestion, setSelectedQuestion] = useState("");
         })}
       </select>
 
-      {/* <ActivityChart activityStats={stats?.activityStats} /> */}
+      <ActivityChart activityStats={stats?.activityStats} />
 
       {/* <pre>{JSON.stringify(stats, null, 2)}</pre> */}
       {stats && (

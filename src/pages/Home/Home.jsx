@@ -13,7 +13,7 @@ const Home = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const start = Number(searchParams.get("start")) || 0;
-  const limit =2;
+  const limit =6;
   useEffect(() => {
     const getSurvey = async (params) => {
       try {
