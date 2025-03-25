@@ -63,7 +63,6 @@ const Office = (props) => {
           );
         })}
       </select>
-      {stats && <p>Cередній час проходження опитування {formatTime(stats?.averageDuration)}</p>}
       {stats && (
         <select
           onChange={(e) => handleQuestionChange(e.target.value)}
@@ -85,6 +84,7 @@ const Office = (props) => {
           <DataForChart data={stats?.answersStats[selectedQuestion] || []} />
         )}
       </div>
+        {stats && <p>Cередній час проходження опитування {formatTime(stats?.averageDuration)}</p>}
     </div>
   );
 };

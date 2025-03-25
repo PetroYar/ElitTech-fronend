@@ -45,20 +45,29 @@ const Home = (props) => {
     }
   };
 
-  return (
-    <div className={styles.container}>
-      <ul>
-        {data?.surveys.map((survey) => {
-          return (
-            <li key={survey._id}>
-              <SurveyCard data={survey} onDelete={deliteSurvey} />
-            </li>
-          );
-        })}
-      </ul>
-     <Pagination start={start} firstPage={data?.firstPage} lastPage={data?.lastPage} limit={limit} currentPage={data?.currentPage} />
-    </div>
-  );
+
+
+return data ? (
+  <div className={styles.container}>
+    <ul>
+      {data.surveys.map((survey) => (
+        <li key={survey._id}>
+          <SurveyCard data={survey} onDelete={deliteSurvey} />
+        </li>
+      ))}
+    </ul>
+    <Pagination
+      start={start}
+      firstPage={data.firstPage}
+      lastPage={data.lastPage}
+      limit={limit}
+      currentPage={data.currentPage}
+    />
+  </div>
+) : (
+  <p>Loading...</p>
+);
+
 };
 
 export default Home;
