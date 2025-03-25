@@ -29,7 +29,12 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
+      
       <h1>Увійти</h1>
+      
+      <span>email: user0@gmail.com</span>
+      <br />
+    <span>password: test123</span>
       <Formik
         initialValues={{
           email: "",
