@@ -4,9 +4,14 @@
 .container{
   display: flex;
   flex-direction: column;
-  gap: toRem(20);
-  padding: 0 toRem(15) toRem(50) toRem(0);
-  
+  gap: toRem(30);
+  padding: 0 toRem(15) toRem(50) toRem(15);
+  h1{
+    text-align: center;
+    font-weight: 500;
+    @include adaptiveValue("font-size",34 ,22 );
+
+  }
   .stats{
     display: flex;
     align-items: center;
@@ -17,6 +22,6 @@
     }
   }
   select{
-    padding: 5px;
+    padding: toRem(10);
   }
 }

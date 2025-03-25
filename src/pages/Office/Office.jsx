@@ -4,21 +4,21 @@ import { getData } from "../../libs/Services";
 import { useAuth } from "../../hooks/useAuth";
 import ActivityChart from "./Charts/ActivityChart";
 import DataForChart from "./Charts/DataForChart";
+import { formatTime } from "../../libs/FormatTime";
 
 const Office = (props) => {
   const [stats, setStats] = useState(null);
   const [surveys, setSurveys] = useState([]);
   const { user } = useAuth();
- 
-const [selectedQuestion, setSelectedQuestion] = useState("");
 
+  const [selectedQuestion, setSelectedQuestion] = useState("");
 
   useEffect(() => {
     const getSurveys = async () => {
       try {
         const res = await getData(`/survey/${user?._id}`);
         setSurveys(res);
-        console.log(res);
+        
       } catch (error) {
         console.error("Помилка отримання статистики:", error);
         if (error.response) {
@@ -46,12 +46,13 @@ const [selectedQuestion, setSelectedQuestion] = useState("");
     getStats(id);
   };
 
- const handleQuestionChange = (selectedQuestion) => {
-   setSelectedQuestion(selectedQuestion);
- };
+  const handleQuestionChange = (selectedQuestion) => {
+    setSelectedQuestion(selectedQuestion);
+  };
 
   return (
     <div className={styles.container}>
+      <h1>Cтатистика ваших опитувань</h1>
       <select onChange={(e) => getSurveyId(e.target.value)}>
         <option value="">Виберіть опитування</option>
         {surveys.map((survey) => {
@@ -62,6 +63,7 @@ const [selectedQuestion, setSelectedQuestion] = useState("");
           );
         })}
       </select>
+      {stats && <p>Cередній час проходження опитування {formatTime(stats?.averageDuration)}</p>}
       {stats && (
         <select
           onChange={(e) => handleQuestionChange(e.target.value)}
@@ -75,14 +77,14 @@ const [selectedQuestion, setSelectedQuestion] = useState("");
           ))}
         </select>
       )}
-<div className={styles.stats}>
-   <ActivityChart activityStats={stats?.activityStats} />
+      <div className={styles.stats}>
+        {stats && <ActivityChart activityStats={stats?.activityStats} />}
 
-      {/* <pre>{JSON.stringify(stats, null, 2)}</pre> */}
-      {selectedQuestion && <DataForChart data={stats?.answersStats[selectedQuestion] || []} />}
-      
-</div>
-     
+        {/* <pre>{JSON.stringify(stats, null, 2)}</pre> */}
+        {selectedQuestion && (
+          <DataForChart data={stats?.answersStats[selectedQuestion] || []} />
+        )}
+      </div>
     </div>
   );
 };
