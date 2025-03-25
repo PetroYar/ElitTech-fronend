@@ -62,10 +62,6 @@ const [selectedQuestion, setSelectedQuestion] = useState("");
           );
         })}
       </select>
-
-      <ActivityChart activityStats={stats?.activityStats} />
-
-      {/* <pre>{JSON.stringify(stats, null, 2)}</pre> */}
       {stats && (
         <select
           onChange={(e) => handleQuestionChange(e.target.value)}
@@ -79,7 +75,13 @@ const [selectedQuestion, setSelectedQuestion] = useState("");
           ))}
         </select>
       )}
+<div className={styles.stats}>
+   <ActivityChart activityStats={stats?.activityStats} />
+
+      {/* <pre>{JSON.stringify(stats, null, 2)}</pre> */}
       <DataForChart data={stats?.answersStats[selectedQuestion] || []} />
+</div>
+     
     </div>
   );
 };

@@ -29,9 +29,15 @@ const DataForChart = ({ data }) => {
     "#E912A5",
     "#62F773",
   ]; 
-
+const truncatedLabels = labels.map((label) => {
+  if (label.length > 20) {
+    // Налаштуйте довжину за потреби
+    return label.substring(0, 40) + "...";
+  }
+  return label;
+});
   const chartOptions = {
-    labels,
+    labels: truncatedLabels,
     datasets: [
       {
         data: chartData,

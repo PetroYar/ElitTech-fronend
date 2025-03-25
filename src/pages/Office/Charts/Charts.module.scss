@@ -3,7 +3,13 @@
 
 .doughnut{
   margin: 0 auto;
+  max-width: 900px !important;
+  max-height: 400px !important;
 
-
-  @include adaptiveValue("width",400 ,300 );
+  canvas{
+    max-width: 100% !important;
+    width: 500px !important;
+    height: 500px !important;
+    max-height: max-content;
+  }
 }

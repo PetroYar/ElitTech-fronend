@@ -4,5 +4,19 @@
 .container{
   display: flex;
   flex-direction: column;
-  gap: toRem(20)
+  gap: toRem(20);
+  padding: 0 toRem(15) toRem(50) toRem(0);
+  
+  .stats{
+    display: flex;
+    align-items: center;
+    margin-top: toRem(20);
+    @media (max-width:1150px){
+      flex-direction: column-reverse;
+      gap: toRem(100);
+    }
+  }
+  select{
+    padding: 5px;
+  }
 }

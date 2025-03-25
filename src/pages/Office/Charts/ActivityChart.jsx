@@ -94,7 +94,7 @@ const ActivityChart = ({ activityStats }) => {
   const chartData = formatData(activityStats);
 
   return (
-    <div style={{width:'50%'}}>
+    <div style={{width:'100%',maxWidth: '700px'}}>
       <div>
         <label>Вибір періоду:</label>
         <select onChange={(e) => setViewMode(e.target.value)} value={viewMode}>
