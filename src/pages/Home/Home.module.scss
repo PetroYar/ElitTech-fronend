@@ -1,7 +1,7 @@
 @use "../../styles/forward.scss" as *;
 
 .container {
-  padding: 0 toRem(15);
+  padding: 0 toRem(15) toRem(50) toRem(15);
   ul {
     display: flex;
     flex-wrap: wrap;

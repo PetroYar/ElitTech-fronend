@@ -6,7 +6,7 @@
   justify-content: center;
  
   margin: toRem(40) 0;
-
+gap: toRem(10);
   .active {
     color: $header-color;
   }
@@ -21,11 +21,11 @@
     align-items: center;
     margin-bottom: toRem(0);
     padding-bottom: toRem(0);
-    gap: toRem(3);
+    gap: toRem(10);
     // width: 130px;
     justify-content: center;
     li{
-      padding: toRem(2);
+      padding: toRem(3);
       background: $card-background;
       font-size: toRem(20);
     }
