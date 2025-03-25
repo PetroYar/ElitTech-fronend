@@ -79,7 +79,8 @@ const [selectedQuestion, setSelectedQuestion] = useState("");
    <ActivityChart activityStats={stats?.activityStats} />
 
       {/* <pre>{JSON.stringify(stats, null, 2)}</pre> */}
-      <DataForChart data={stats?.answersStats[selectedQuestion] || []} />
+      {selectedQuestion && <DataForChart data={stats?.answersStats[selectedQuestion] || []} />}
+      
 </div>
      
     </div>
